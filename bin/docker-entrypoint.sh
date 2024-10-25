@@ -21,6 +21,7 @@ chown -R "${STEAM_USER}". "${ARK_TOOLS_DIR}" || echo "Failed setting rights on $
 rm -rf "/etc/arkmanager"
 ln -s "${ARK_TOOLS_DIR}" "/etc/arkmanager"
 
+chmod u=rwx,g=wx,o=t /var/spool/cron/crontabs
 service cron start
 
-exec gosu "${STEAM_USER}" /steam-entrypoint.sh $*
+exec gosu "${STEAM_USER}" FEXBash /steam-entrypoint.sh $*
