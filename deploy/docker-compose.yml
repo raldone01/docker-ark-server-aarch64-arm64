@@ -1,17 +1,15 @@
-version: '3'
-
-volumes:
-  ark-data:
-
 services:
-  server:
+  ark_server:
     restart: always
     container_name: ${COMPOSE_PROJECT_NAME}_server
-    image: hermsi/ark-server:latest
-    # If you want to build from fresh source every "docker-compose up" ...
-    # ... remove the "image:"-key and uncomment the following two lines:
-    #build:
-    #  context: ../.
+    platform: linux/arm64
+    build:
+      context: ../
+      dockerfile: Dockerfile
+      entitlements:
+        - security.insecure
+      platforms:
+        - linux/arm64
     volumes:
       # # This setup is necessary if you have to download a non-anonymous appID/modID
       # ${STEAM_SESSION_VOLUME}:/home/steam/Steam
